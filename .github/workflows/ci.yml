@@ -110,6 +110,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - name: Make Gradlew Executable
+        if: env.turbo_cache_hit != 1
+        run: chmod +x example/android/gradlew
+
       - name: Build example for Android
         env:
           GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx6g"
